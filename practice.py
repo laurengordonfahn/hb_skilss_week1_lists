@@ -291,8 +291,12 @@ def average(numbers):
     (Think of the best way to handle an empty input list, though,
     a feel free to provide a good solution here.)
     """
-
-    return 0
+    if len(numbers) == 0:
+        return 
+    sum_numbers = 0
+    for number in numbers:
+        sum_numbers = sum_numbers + number
+    return sum_numbers/2.0
 
 
 def join_strings_with_comma(words):
@@ -311,8 +315,13 @@ def join_strings_with_comma(words):
         >>> join_strings_with_comma(["Pretzel"])
         'Pretzel'
     """
-
-    return ""
+    list_to_string = words[0]
+    index = 1
+    while index < len(words):
+        list_to_string = list_to_string + ", " + words[index]
+        index +=1
+    
+    return list_to_string
 
 
 def reverse_list(items):
@@ -338,9 +347,9 @@ def reverse_list(items):
         ['apple', 'berry', 'cherry']
     """
 
-    return []
+    return items[::-1]
 
-
+# *********COME BACK TO THIS ONE
 def reverse_list_in_place(items):
     """Reverse the input list `in place`.
 
@@ -363,9 +372,11 @@ def reverse_list_in_place(items):
         >>> orig
         ['I', 'love', 'cookies']
     """
-
-    return []
-
+    saved_list = items
+    for ind, item in enumerate(saved_list):
+        items[-ind] = item
+    
+    return items
 
 def duplicates(items):
     """Return list of words from input list which were duplicates.
@@ -393,8 +404,20 @@ def duplicates(items):
         ['apple', 'apple', 'berry']
     """
 
-    return []
-
+    
+    index1 = 0
+    duplicates_list = []
+    while index1 < (len(items) -1):
+        index2 = index1 + 1
+        while index2 < len(items):
+            if items[index1] == items[index2]:
+                if items[index1] not in duplicates_list:
+                    duplicates_list.append(items[index1]) 
+                    
+            index2 +=1
+        index1 +=1
+        
+    return sorted(duplicates_list)
 
 def find_letter_indices(words, letter):
     """Return list of indices where letter appears in each word.
@@ -422,8 +445,20 @@ def find_letter_indices(words, letter):
     ("o" does not appear in "jumps", so the result for that input is
     `None`.)
     """
+    index_list = []
+    for word in words:
+        index = 0
+        while index < len(word):
+            if letter not in word:
+                index_list.append(None)
+                break
+            elif word[index] == letter:
+                index_list.append(index)
+                break 
+            index +=1
+            
+    return index_list
 
-    return []
 
 #####################################################################
 # END OF PRACTICE: You can ignore everything below.
