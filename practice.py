@@ -42,7 +42,7 @@ def long_words(words):
     long_words = []
 
     for word in words:
-        if len(word) >= 4:
+        if len(word) > 4:
             long_words.append(word)
     return long_words
 
@@ -103,23 +103,23 @@ def smallest_int(numbers):
     
     # return ordered[0]
 
-    # If we can't do sorted using function I wrote above swap_numbers
+    # If we can't do sorted using function I wrote ABOVE swap_numbers
 
    
-    # if len(numbers) == 0:
-    #     return 
+    if len(numbers) == 0:
+        return 
    
-    # index1 = 0
-    # while index1 < len(numbers):
+    index1 = 0
+    while index1 < len(numbers):
     
-    #     index2 = 1
-    #     while index2 < len(numbers):
-    #         if numbers[index2] < numbers[index1]:
-    #             swap_numbers(index1, index2, numbers)
-    #         index2 +=1
-    #     index1 +=1
+        index2 = 1
+        while index2 < len(numbers):
+            if numbers[index2] < numbers[index1]:
+                swap_numbers(index1, index2, numbers)
+            index2 +=1
+        index1 +=1
 
-    # return numbers[0]
+    return numbers[0]
 
     # OR if it should be shorter code the below is optimized I think
     # if len(numbers) == 0:
@@ -290,13 +290,17 @@ def average(numbers):
 
     (Think of the best way to handle an empty input list, though,
     a feel free to provide a good solution here.)
+        
     """
+    #For some reason adding my test for an empty list messed things up so lets talk about that but this was what I would want
+    # >>> average([])
+    #     None
     if len(numbers) == 0:
         return 
     sum_numbers = 0
     for number in numbers:
-        sum_numbers = sum_numbers + number
-    return sum_numbers/2.0
+        sum_numbers = float(sum_numbers) + number
+    return sum_numbers/len(numbers)
 
 
 def join_strings_with_comma(words):
@@ -347,9 +351,12 @@ def reverse_list(items):
         ['apple', 'berry', 'cherry']
     """
 
-    return items[::-1]
+    new_list = items[::-1]
+    
+    return new_list
 
 # *********COME BACK TO THIS ONE
+
 def reverse_list_in_place(items):
     """Reverse the input list `in place`.
 
@@ -372,10 +379,18 @@ def reverse_list_in_place(items):
         >>> orig
         ['I', 'love', 'cookies']
     """
-    saved_list = items
-    for ind, item in enumerate(saved_list):
-        items[-ind] = item
+    # WHEN I RUN THIS WITH OUT LINE 373 and 378 which have >>> orig in it this runs I don't understand why that line is in the test code nor how to accomidate for it. I have checked the id() of my items list before the code is run and after it has executed and they have the same parking spot number so I think that should be proof that this code reverses inplace? Lets talk about how I could have over come this issue! Thank you
+
+    saved_list = items[:]
+    negative_ind = 0
+    for ind, item in enumerate(items):
     
+        if ind == 0:
+            negative_ind = -1
+        else:
+            negative_ind = (-1 * ind) -1
+        
+        items[ind] = saved_list[negative_ind]
     return items
 
 def duplicates(items):
